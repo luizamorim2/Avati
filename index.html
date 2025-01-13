@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js " lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Autenticação</title>
+    <meta name="author" content="Luiz">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="th-header header-layout1">
+        <div class="sticky-wrapper">
+            <div class="menu-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html">
+                                    <img src="assets/img/logo.svg" alt="logo">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logo-bg"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <div class="contact-page-1 space">
+        <div class="contact-sec space bg-repeat overflow-hidden" data-bg-src="">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-xl-6 pe-xxl-5">
+                        <div class="title-area">
+                            <h2 class="sec-title text-white">Conecte-se</h2>
+                        </div>
+                        <form id="loginForm" method="POST">
+                            <div class="row">
+                                <div class="form-group style-border2 col-md-6 position-relative">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                    <small id="emailError" class="text-danger d-none">Por favor, insira um endereço de e-mail válido.</small>
+                                  </div>
+                                  
+                                  <div class="form-group style-border2 col-md-6 position-relative">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Senha" required>
+                                    <span id="togglePassword" class="position-absolute" style="cursor: pointer; right: 30px; top: 18px;">👁️</span>
+                                    <small id="passwordError" class="text-danger d-none">A senha deve ter pelo menos 6 caracteres.</small>
+                                  </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="style-border2 col-md-6">
+                                    <button type="button" class="btn btn-primary" onclick="validateLoginForm()">Login</button>
+                                </div>
+                                <div class="style-border2 col-md-6">
+                                    <h10 class="sec-title text-white">
+                                        Não tem cadastro? <a href="register.html" class="text-primary">Crie uma conta</a>
+                                    </h10>
+                                </div>
+                            </div>
+                            <small id="successMessage" class="text-success d-none">Login realizado com sucesso!</small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-wrapper">
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6">
+                        <p class="copyright-text bg-repeat" target="_blank">
+                            <i class="fal fa-copyright"></i> 2025. Todos os direitos reservados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            const passwordField = document.getElementById("password");
+            const isPassword = passwordField.getAttribute("type") === "password";
+            passwordField.setAttribute("type", isPassword ? "text" : "password");
+            this.textContent = isPassword ? "🙈" : "👁️";
+        });
+
+        function validateLoginForm() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+            const successMessage = document.getElementById("successMessage");
+
+            let isValid = true;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                emailError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                emailError.classList.add("d-none");
+            }
+
+            if (password.length < 6) {
+                passwordError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                passwordError.classList.add("d-none");
+            }
+
+            if (isValid) {
+                successMessage.classList.remove("d-none");
+                alert("Login realizado com sucesso!")
+            } else {
+                successMessage.classList.add("d-none");
+            }
+        }
+    </script>
+
+    <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

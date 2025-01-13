@@ -1,0 +1,170 @@
+<!doctype html>
+<html class="no-js " lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Autenticação</title>
+    <meta name="author" content="Luiz">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="th-header header-layout1">
+        <div class="sticky-wrapper">
+            <div class="menu-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html">
+                                    <img src="assets/img/logo.svg" alt="logo">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logo-bg"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cadastro Section -->
+    <div class="contact-page-1 space">
+        <div class="contact-sec space bg-repeat overflow-hidden" data-bg-src="">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-xl-6 pe-xxl-5">
+                        <div class="title-area">
+                            <span class="sub-title style2">Área de registro</span>
+                            <h2 class="sec-title text-white">Cadastrar</h2>
+                        </div>
+                        <form id="registerForm" method="POST">
+                            <div class="row">
+                                <div class="form-group style-border2 col-md-6">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Nome de utilizador" required>
+                                </div>
+                                <div class="form-group style-border2 col-md-6">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                    <small id="emailError" class="text-danger d-none">Por favor, insira um endereço de e-mail válido.</small>
+                                </div>
+                                <div class="form-group style-border2 col-md-6 position-relative">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Senha" required>
+                                    <span id="togglePassword1" class="position-absolute" style="cursor: pointer; right: 30px; top: 18px;">👁️</span>
+                                    <small id="passwordError" class="text-danger d-none">A senha deve ter pelo menos 6 caracteres.</small>
+                                </div>
+                                <div class="form-group style-border2 col-md-6 position-relative">
+                                    <input type="password" class="form-control" name="checkpassword" id="checkpassword" placeholder="Confirmar senha" required>
+                                    <span id="togglePassword2" class="position-absolute" style="cursor: pointer; right: 30px; top: 18px;">👁️</span>
+                                    <small id="passwordMatchError" class="text-danger d-none">As senhas não coincidem.</small>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="style-border2 col-md-6">
+                                    <button type="button" class="btn btn-primary" onclick="validateRegisterForm()">Cadastrar</button>
+                                </div>
+                                <div class="style-border2 col-md-6">
+                                    <h10 class="sec-title text-white">
+                                        Já tem cadastro? <a href="login.html" class="text-primary">efetue login</a>
+                                    </h10>
+                                </div>
+                                <small id="successMessage" class="text-success d-none">Cadastro realizado com sucesso!</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-wrapper">
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6">
+                        <p class="copyright-text bg-repeat" target="_blank">
+                            <i class="fal fa-copyright"></i> 2025. Todos os direitos reservados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("togglePassword1").addEventListener("click", function () {
+            togglePasswordVisibility("password", "togglePassword1");
+        });
+
+        document.getElementById("togglePassword2").addEventListener("click", function () {
+            togglePasswordVisibility("checkpassword", "togglePassword2");
+        });
+
+        function togglePasswordVisibility(inputId, toggleId) {
+            const passwordField = document.getElementById(inputId);
+            const toggleButton = document.getElementById(toggleId);
+            const isPassword = passwordField.getAttribute("type") === "password";
+
+            passwordField.setAttribute("type", isPassword ? "text" : "password");
+            toggleButton.textContent = isPassword ? "🙈" : "👁️";
+        }
+
+        function validateRegisterForm() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const checkPassword = document.getElementById("checkpassword").value;
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+            const passwordMatchError = document.getElementById("passwordMatchError");
+            const successMessage = document.getElementById("successMessage");
+
+            let isValid = true;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                emailError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                emailError.classList.add("d-none");
+            }
+
+            if (password.length < 6) {
+                passwordError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                passwordError.classList.add("d-none");
+            }
+
+            if (password !== checkPassword) {
+                passwordMatchError.classList.remove("d-none");
+                isValid = false;
+            } else {
+                passwordMatchError.classList.add("d-none");
+            }
+
+            if (isValid) {
+                alert("Cadastro realizado com sucesso!")
+                successMessage.classList.remove("d-none");
+            } else {
+                successMessage.classList.add("d-none");
+            }
+        }
+    </script>
+
+    <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
