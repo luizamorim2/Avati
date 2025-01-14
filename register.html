@@ -143,7 +143,6 @@
 
             let isValid = true;
 
-            // Verifica o email
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(email)) {
                 emailError.classList.remove("d-none");
@@ -152,7 +151,6 @@
                 emailError.classList.add("d-none");
             }
 
-            // Verifica a senha
             if (password.length < 6) {
                 passwordError.classList.remove("d-none");
                 isValid = false;
@@ -160,7 +158,6 @@
                 passwordError.classList.add("d-none");
             }
 
-            // Verifica se as senhas coincidem
             if (password !== checkPassword) {
                 passwordMatchError.classList.remove("d-none");
                 isValid = false;
@@ -168,7 +165,6 @@
                 passwordMatchError.classList.add("d-none");
             }
 
-            // Se todas as validações passarem, exibe a mensagem de sucesso
             if (isValid) {
                 alert("Cadastro realizado com sucesso!");
                 successMessage.classList.remove("d-none");
