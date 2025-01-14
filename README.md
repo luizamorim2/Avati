@@ -14,8 +14,8 @@ Para executar o projeto, é necessário ter o [Node.js](https://nodejs.org/pt/do
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/luizamorim2/BChain.git
-   cd BChain
+   git clone https://github.com/luizamorim2/Avati.git
+   cd Avati
    ```
 
 2. Instale as dependências:
